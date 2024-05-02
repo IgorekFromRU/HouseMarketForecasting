@@ -11,7 +11,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
-    message = """Сервер запущен. 
+    message = """Сервер запущен.
     Для получения прогноза запустите файл client.py."""
     return message
 
@@ -25,5 +25,5 @@ def predict():
 
 
 if __name__ == '__main__':
-    #app.run('localhost', 5000)
+    # app.run('localhost', 5000)
     app.run(host='0.0.0.0', port=5000)

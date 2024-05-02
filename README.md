@@ -74,3 +74,40 @@
 Дипломный проект позволил проверить свои силы и приобретенные за время годового курса DS-знания и навыки на реальной задаче.
 P.S: Есть множество способов совершенствовать нашу задачу, т.е. повысить качество модели.
 :arrow_up: [к оглавлению](#%D0%BE%D0%B3%D0%BB%D0%B0%D0%B2%D0%BB%D0%B5%D0%BD%D0%B8%D0%B5)
+
+Чтобы создать Docker-образ, выполните следующие шаги:
+1. Создайте файл Dockerfile в корневом каталоге вашего проекта.
+```
+    FROM python:3.9
+    WORKDIR /usr/src/app
+    COPY ./app/ ./
+    COPY ./requirements.txt ./
+    RUN pip install --no-cache-dir -r requirements.txt
+    RUN pip install xgboost
+    RUN apt-get clean
+    CMD [ "python", "./server.py" ]      CMD [ "python", "./server.py" ]
+```
+
+2. Создайте файл requirements.txt 
+pip freeze > requirements.txt
+
+3. Запустите следующую команду в командной строке в директории с вашим Dockerfile:
+docker build -t my_flask_app .
+Эта команда создаст Docker-образ с именем my_flask_app на основе Dockerfile в текущем каталоге (.).
+
+4. После успешного выполнения этой команды вы можете запустить контейнер Docker: 
+docker run -d -p 5000:5000 my_flask_app
+
+Заходим на страничку localhost:5000
+
+5. Запускаем в консоли:
+    test/client.py
+
+
+Список полезных команд:
+- docker images - список образов
+- docker ps -a  -список процессов
+- docker image prune -a - удалить все образы с потверждением
+- docker stop $(docker ps -aq) - остановить все процессы 
+
+![](img/Docker_running.png)
